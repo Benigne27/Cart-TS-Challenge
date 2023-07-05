@@ -1,0 +1,30 @@
+.theImages {
+  height: 200px;
+  width: 200px;
+}
+.main-products {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-left: 60px;
+}
+.product-image {
+  width: 250px;
+  height: 250px;
+  box-shadow: 2px 2px 3px 3px rgba(128, 128, 128, 0.541);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.product-detail {
+  width: 280px;
+  height: 600px;
+  margin-top: 20px;
+  font-size: 12px;
+  align-items: center;
+}
+
+.product-image:active {
+  transform: translate(2px, -2px);
+  opacity: 0.7;
+}
