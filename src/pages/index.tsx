@@ -60,7 +60,7 @@ const Landing = () => {
             onClick={() => addToCart(detail)}
           >
             <div className="product-image">
-              <img src={detail.image} className="theImages" alt="image" />
+              <img src={detail.image} className="theImages" alt="product" />
             </div>
             <h3 className="title">{detail.title}</h3>
             <h4 className="category">{detail.category}</h4>
