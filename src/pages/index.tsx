@@ -1,7 +1,6 @@
 import { useState } from "react";
 import "../styles/index.css";
 import BackToTop from "../components/BackToTop";
-// import { Link } from "react-router-dom";
 
 export interface Product {
   id: number;
@@ -61,7 +60,7 @@ const Landing = () => {
             onClick={() => addToCart(detail)}
           >
             <div className="product-image">
-              <img src={detail.image} className="theImages" />
+              <img src={detail.image} className="theImages" alt="image" />
             </div>
             <h3 className="title">{detail.title}</h3>
             <h4 className="category">{detail.category}</h4>
