@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "../styles/index.css";
 import BackToTop from "../components/BackToTop";
+import SearchBar from "../components/SearchBar";
 
 export interface Product {
   id: number;
@@ -14,15 +15,25 @@ export interface Product {
 
 const Landing = () => {
   const [theData, setTheData] = useState<Product[]>([]);
+  const [searchResults, setSearchResults] = useState<Product[]>([]);
+  const [beforeSearch, setBeforeSearch] = useState<boolean>(true);
   fetch("https://fakestoreapi.com/products")
     .then((res) => res.json())
     .then((data) => {
       setTheData(data);
+      setBeforeSearch(false);
       console.log(data);
     })
     .catch((error) => {
       console.error(error);
     });
+
+    const handleSearch = (searchTerm: string) => {
+      const filteredProducts = theData.filter((product) =>
+        product.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setSearchResults(filteredProducts);
+    };
 
   const addToCart = (product: Product) => {
     const item: any = localStorage.getItem("product");
@@ -52,7 +63,9 @@ const Landing = () => {
         <i className="bx bx-cart-alt"></i>
       </span>
       <div className="heading">All Products</div>
-      <div className="main-products">
+      <SearchBar onSearch={handleSearch} />
+      {beforeSearch ? (
+        <div className="main-products">
         {theData.map((detail) => (
           <div
             className="product-detail"
@@ -69,6 +82,25 @@ const Landing = () => {
           </div>
         ))}
       </div>
+      ) : (
+      <div className="main-products">
+        {searchResults.map((detail) => (
+          <div
+            className="product-detail"
+            key={detail.id}
+            onClick={() => addToCart(detail)}
+          >
+            <div className="product-image">
+              <img src={detail.image} className="theImages" alt="product" />
+            </div>
+            <h3 className="title">{detail.title}</h3>
+            <h4 className="category">{detail.category}</h4>
+            <p className="description">{detail.description}</p>
+            <h3 className="price">${detail.price}</h3>
+          </div>
+        ))}
+      </div>
+      )}
       <BackToTop />
     </div>
   );

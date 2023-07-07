@@ -12,7 +12,7 @@ const Cart = () => {
     const item: any = localStorage.getItem("product");
     setCartItems(JSON.parse(item));
   };
-  // console.log(cartItems);
+  
 
   useEffect(() => {
     ShowCart();
